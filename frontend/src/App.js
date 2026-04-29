@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { Toaster } from "./components/ui/sonner";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
@@ -11,6 +11,8 @@ import Skills from "./components/Skills";
 import PersonalProjects from "./components/PersonalProjects";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
+import Cursor from "./components/Cursor";
+import CaseStudy from "./pages/CaseStudy";
 
 const Home = () => {
   // Reveal-on-scroll observer
@@ -32,7 +34,8 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="grain bg-bg ink min-h-screen">
+    <div className="page-enter grain bg-bg ink min-h-screen">
+      <Cursor />
       <Navbar />
       <main>
         <Hero />
@@ -48,16 +51,23 @@ const Home = () => {
   );
 };
 
+// Scroll restoration & route change handler
+const RouteChange = ({ children }) => {
+  const location = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
+  return children;
+};
+
 function App() {
-  // Persist dark mode preference
-  const [theme, setTheme] = useState("light");
+  const [, setTheme] = useState("light");
   useEffect(() => {
     const saved = localStorage.getItem("asm-theme");
     if (saved === "dark") {
       document.documentElement.classList.add("dark");
       setTheme("dark");
     }
-    // Listen for theme changes from Navbar
     const onChange = (e) => setTheme(e.detail);
     window.addEventListener("asm-theme", onChange);
     return () => window.removeEventListener("asm-theme", onChange);
@@ -66,9 +76,12 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />} />
-        </Routes>
+        <RouteChange>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/work/:slug" element={<CaseStudy />} />
+          </Routes>
+        </RouteChange>
       </BrowserRouter>
       <Toaster position="bottom-right" />
     </div>

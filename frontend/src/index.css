@@ -72,18 +72,30 @@
   .bg-accent { background: hsl(var(--accent)); }
 
   .btn-primary {
-    @apply inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-medium transition-colors duration-200;
+    @apply inline-flex items-center gap-2 px-6 py-3 text-sm font-medium transition-all duration-300;
     background: hsl(var(--ink));
     color: hsl(var(--bg));
+    border-radius: 12px;
+    box-shadow: 0 1px 2px hsl(var(--ink) / 0.08);
   }
-  .btn-primary:hover { background: hsl(var(--accent)); color: white; }
+  .btn-primary:hover {
+    background: hsl(var(--accent));
+    color: white;
+    box-shadow: 0 8px 24px hsl(var(--accent) / 0.28);
+    transform: translateY(-1px);
+  }
 
   .btn-ghost {
-    @apply inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-medium transition-colors duration-200;
+    @apply inline-flex items-center gap-2 px-6 py-3 text-sm font-medium transition-all duration-300;
     border: 1px solid hsl(var(--ink));
     color: hsl(var(--ink));
+    border-radius: 12px;
   }
-  .btn-ghost:hover { background: hsl(var(--ink)); color: hsl(var(--bg)); }
+  .btn-ghost:hover {
+    background: hsl(var(--ink));
+    color: hsl(var(--bg));
+    transform: translateY(-1px);
+  }
 
   .link-underline {
     background-image: linear-gradient(currentColor, currentColor);
@@ -112,6 +124,73 @@
 @keyframes marquee {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
+}
+
+/* Soft, layered premium shadow */
+.shadow-soft {
+  box-shadow:
+    0 1px 2px hsl(var(--ink) / 0.04),
+    0 8px 24px -12px hsl(var(--ink) / 0.08),
+    0 24px 60px -28px hsl(var(--ink) / 0.10);
+}
+.shadow-soft-lg {
+  box-shadow:
+    0 2px 4px hsl(var(--ink) / 0.05),
+    0 16px 40px -16px hsl(var(--ink) / 0.14),
+    0 40px 80px -32px hsl(var(--ink) / 0.18);
+}
+
+/* Featured project card lift on hover */
+.proj-card {
+  transition:
+    transform 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.4s ease;
+  box-shadow:
+    0 1px 2px hsl(var(--ink) / 0.04),
+    0 8px 24px -12px hsl(var(--ink) / 0.06);
+}
+.proj-card:hover {
+  transform: translateY(-6px);
+  border-color: hsl(var(--ink) / 0.18);
+  box-shadow:
+    0 2px 4px hsl(var(--ink) / 0.05),
+    0 24px 60px -20px hsl(var(--ink) / 0.18),
+    0 60px 100px -40px hsl(var(--ink) / 0.20);
+}
+.proj-card .cover-img {
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Page enter transition (fade + slight up) */
+.page-enter {
+  animation: pageIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes pageIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* Word-by-word mask reveal */
+.mask-reveal { display: inline-block; }
+.mask-word {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  line-height: 1;
+}
+.mask-inner {
+  display: inline-block;
+  transform: translateY(110%);
+  transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+.reveal.in .mask-inner { transform: translateY(0); }
+
+/* Image hover mask reveal for project list (legacy, retained for safety) */
+.proj-row .proj-img {
+  opacity: 0;
+  pointer-events: none;
 }
 
 @keyframes blink {

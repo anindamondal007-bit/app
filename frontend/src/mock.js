@@ -34,86 +34,270 @@ export const aboutCopy = {
 
 export const featuredProjects = [
   {
-    id: "careoff",
+    id: "careoff-customer",
+    slug: "careoff-customer",
     index: "01",
-    name: "CareOff",
-    category: "Dual-Sided Care Platform",
+    name: "CareOff Customer App",
+    category: "Mobile App",
     year: "2025",
+    status: "Live",
     role: "Lead UI/UX Designer",
     cover:
       "https://images.unsplash.com/photo-1591608517093-3bb6aa9efe35?w=1600&q=80",
-    accent: "#0B1B3A",
+    teaser:
+      "A mobile app for families to discover and book trusted babysitters and elder-care professionals.",
     summary:
-      "End-to-end design of a dual-sided mobile platform connecting families with verified caregivers for baby and elder care.",
-    problem:
-      "Families struggle to find verified, trustworthy caregivers; caregivers lack a structured way to discover and apply for relevant work.",
-    process:
-      "Discovery interviews, journey mapping, low-fi flows, OTP-driven trust patterns, then a high-fidelity system with shared tokens across two apps.",
-    solution:
-      "Two synchronized apps — a Customer app for discovery and booking, and a Companion app for caregivers to apply and manage jobs — built on a single scalable design system.",
-    outcomes: [
-      "Shipped from concept to launch",
-      "Unified design system across 2 apps",
-      "Trust-driven OTP and verification flows",
-      "Owned brand, app store creatives & logo",
+      "End-to-end design of the consumer side of CareOff \u2014 a marketplace that helps families discover, vet and book verified caregivers in minutes.",
+    tags: ["UX Design", "Mobile App", "Marketplace", "Design System"],
+    figma:
+      "https://www.figma.com/proto/Z7tZQApoTpEAPn81FGxkJR/CareOff--Phase-2-?page-id=15221%3A11373&node-id=15221-15063&starting-point-node-id=15221%3A15101&show-proto-sidebar=1",
+    links: [
+      { label: "Live Website", href: "https://careoff.com/" },
+      { label: "App Store", href: "https://apps.apple.com/in/app/careoff/id6759446251" }
     ],
-    tags: ["Mobile", "Marketplace", "Design System", "Branding"],
-    link: "https://www.figma.com/proto/Z7tZQApoTpEAPn81FGxkJR/CareOff--Phase-2-?page-id=15221%3A11373&node-id=15221-15063&starting-point-node-id=15221%3A15101&show-proto-sidebar=1",
+    overview: {
+      problem:
+        "Families struggle to find verified, trustworthy caregivers fast — existing options are fragmented across classifieds, agencies and word-of-mouth, with little visibility into background, ratings or availability.",
+      users: [
+        "Working parents needing reliable babysitters",
+        "Adult children arranging care for elderly parents",
+        "Households needing structured, recurring care"
+      ],
+      goals: [
+        "Make discovery feel safe, fast and human",
+        "Reduce booking friction to under 90 seconds",
+        "Build trust through verification, not marketing copy"
+      ]
+    },
+    process: {
+      research:
+        "6 user interviews with parents and adult-child caregivers, plus competitive teardowns of UrbanCompany, Care.com and local agencies.",
+      flows: [
+        "Onboarding → location → service type → caregiver list",
+        "Caregiver profile → availability → booking confirmation",
+        "Trust loop: OTP verify → background badge → ratings"
+      ],
+      wireframes:
+        "Lo-fi flows in FigJam, validated with 4 parents before moving to hi-fi. Iterated booking sheet 3 times to remove cognitive load.",
+      designSystem:
+        "Built a 60+ token system (color, type, spacing, elevation, motion) shared with the Companion app to keep both sides visually consistent."
+    },
+    solution: {
+      features: [
+        "OTP-based phone verification & ID badge on profiles",
+        "Real-time booking + scheduled care service flows",
+        "Care-type tabs (Baby · Elder) with persona-aware filters",
+        "In-app chat scaffolding and rating loop",
+        "Brand identity, logo and App Store creatives"
+      ]
+    },
+    impact: [
+      "Shipped to App Store and onboarded first cohort of caregivers",
+      "Cut booking flow from 7 screens to 4",
+      "Reused design tokens cut Companion-app design time by ~40%"
+    ],
+    gallery: [
+      "https://images.unsplash.com/photo-1591608517093-3bb6aa9efe35?w=1400&q=80",
+      "https://images.unsplash.com/photo-1707836916010-3c4ad261936c?w=1400&q=80",
+      "https://images.pexels.com/photos/4724371/pexels-photo-4724371.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+    ]
   },
   {
-    id: "connectedx",
+    id: "careoff-pro",
+    slug: "careoff-professional",
     index: "02",
-    name: "ConnectedX Fleet",
-    category: "Fleet Management Suite",
-    year: "2024",
+    name: "CareOff Professional App",
+    category: "Mobile App",
+    year: "2025",
+    status: "Live",
+    role: "Lead UI/UX Designer",
+    cover:
+      "https://images.unsplash.com/photo-1629697776809-f37ceac39e77?w=1600&q=80",
+    teaser:
+      "A companion app for caregivers to discover jobs, manage bookings and deliver services confidently.",
+    summary:
+      "The supply-side of CareOff. A focused, high-trust workspace where vetted caregivers can find work, accept jobs, and run their day — mirroring the customer app on a shared design system.",
+    tags: ["UX Design", "Mobile App", "Marketplace", "Design System"],
+    figma:
+      "https://www.figma.com/proto/Z7tZQApoTpEAPn81FGxkJR/CareOff--Phase-2-?page-id=15221%3A11373&node-id=15221-15063",
+    links: [
+      { label: "App Store", href: "https://apps.apple.com/in/app/careoff-companion/id6759437992" }
+    ],
+    overview: {
+      problem:
+        "Independent caregivers rarely have a structured way to discover relevant jobs nearby — they rely on agencies that take heavy commissions or unstable WhatsApp groups.",
+      users: [
+        "Babysitters and nannies",
+        "Elder-care attendants and home-care nurses",
+        "Part-time caregivers building a freelance practice"
+      ],
+      goals: [
+        "Surface relevant jobs based on skills, distance and availability",
+        "Make application + acceptance one-tap fast",
+        "Give caregivers visibility into earnings and reputation"
+      ]
+    },
+    process: {
+      research:
+        "Field interviews with 5 caregivers; mapped their daily routine to understand decision points and ‘trust gates’ with new families.",
+      flows: [
+        "Sign-up → KYC → skill tagging → availability calendar",
+        "Job feed → detail → apply → confirmation",
+        "Schedule → active booking → check-in → review"
+      ],
+      wireframes:
+        "Designed mobile-first, thumb-zone friendly layouts. Big tap targets and minimal text — most users are on the move.",
+      designSystem:
+        "Shared tokens with the Customer app, but tuned for utility — denser cards, calmer accents, persistent earnings strip."
+    },
+    solution: {
+      features: [
+        "Smart job discovery with distance + skill match",
+        "One-tap apply and accept flows",
+        "Availability calendar synced with schedule",
+        "Earnings tracker and rating loop",
+        "Trust badges (verified ID, training, references)"
+      ]
+    },
+    impact: [
+      "Shipped to App Store as the supply side of the marketplace",
+      "Reduced screens to first relevant job from 6 to 3",
+      "Unified visual language with the Customer app"
+    ],
+    gallery: [
+      "https://images.unsplash.com/photo-1629697776809-f37ceac39e77?w=1400&q=80",
+      "https://images.unsplash.com/photo-1620856902651-ce18d6d31d42?w=1400&q=80",
+      "https://images.pexels.com/photos/196646/pexels-photo-196646.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+    ]
+  },
+  {
+    id: "careoff-web",
+    slug: "careoff-web",
+    index: "03",
+    name: "CareOff Web Platform",
+    category: "Web Platform",
+    year: "2025",
+    status: "Ongoing",
     role: "UI/UX Designer",
     cover:
       "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1600&q=80",
-    accent: "#0B1B3A",
+    teaser:
+      "A desktop platform for job discovery and multi-role dashboards across the care ecosystem.",
     summary:
-      "A telematics-powered fleet management ecosystem for drivers, fleet managers, insurers and admins — all sharing one source of truth.",
-    problem:
-      "Fleet operations are fragmented across drivers, dispatch, insurers and admins. Each persona needs different views of the same vehicle data, in real time.",
-    process:
-      "Stakeholder workshops, role-based information architecture, modular dashboard patterns, then a desktop-first system extended to mobile drivers.",
-    solution:
-      "A web suite with persona-specific dashboards (driver, manager, insurer, admin) covering ELD compliance, DVIR, AI dashcams, FNOL and CRM integrations.",
-    outcomes: [
-      "4 role-based dashboards in one system",
-      "Real-time tracking + ELD/DVIR compliance",
-      "AI dashcam & risk-scoring flows",
-      "Centralised admin control plane",
+      "Extending CareOff beyond mobile — a desktop-first web platform connecting caregivers, support staff and technical professionals with structured opportunities.",
+    tags: ["UX Design", "Web Platform", "Dashboards", "Design System"],
+    figma: "#",
+    links: [],
+    overview: {
+      problem:
+        "Mobile is great for individuals, but recruiters, agencies and multi-role users need a richer desktop experience to manage hiring, schedules and compliance at scale.",
+      users: [
+        "Caregivers applying for long-term roles",
+        "Support staff and coordinators",
+        "Technical professionals in the care ecosystem"
+      ],
+      goals: [
+        "Build a scalable IA that supports multiple roles",
+        "Make job discovery and applications first-class on desktop",
+        "Establish a desktop design system aligned with mobile"
+      ]
+    },
+    process: {
+      research:
+        "Mapped role-based jobs-to-be-done, audited mobile flows for desktop gaps, benchmarked LinkedIn, Indeed and care-specific platforms.",
+      flows: [
+        "Role-aware sign-up and dashboard routing",
+        "Job search with filters, saved searches and alerts",
+        "Application tracker with statuses and reminders"
+      ],
+      wireframes:
+        "12-column desktop grid, persistent left navigation, responsive condensation rules for tablet.",
+      designSystem:
+        "Cross-platform tokens — the same brand on mobile, scaled for dense desktop layouts."
+    },
+    solution: {
+      features: [
+        "Role-based dashboards with personalised feed",
+        "Advanced filters and saved searches",
+        "Application workflows tuned per role",
+        "Scalable IA built to absorb future modules"
+      ]
+    },
+    impact: [
+      "Established desktop-first design system",
+      "Standardised UX patterns across mobile + web",
+      "In active development with engineering"
     ],
-    tags: ["Web", "SaaS", "Dashboards", "Telematics"],
-    link: "https://www.figma.com/proto/GyXvy3chJPUrp9maDJSDME/Fleet-X---Desktop?node-id=2027-30484&starting-point-node-id=2027%3A30484",
+    gallery: [
+      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1400&q=80",
+      "https://images.unsplash.com/photo-1631093441315-a06b9bcbe63f?w=1400&q=80",
+      "https://images.pexels.com/photos/27141316/pexels-photo-27141316.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+    ]
   },
   {
-    id: "tma",
-    index: "03",
-    name: "TMA Telematics",
-    category: "Driver Behavior Mobile App",
+    id: "toyota-lios",
+    slug: "toyota-lios",
+    index: "04",
+    name: "Toyota LIOS Redesign",
+    category: "Enterprise SaaS",
     year: "2024",
+    status: "Shipped",
     role: "UI/UX Designer",
     cover:
-      "https://images.unsplash.com/photo-1629697776809-f37ceac39e77?w=1600&q=80",
-    accent: "#0B1B3A",
+      "https://images.unsplash.com/photo-1707836916010-3c4ad261936c?w=1600&q=80",
+    teaser:
+      "Redesigned billing workflows in Toyota's Logistics Input Output System for clarity and speed.",
     summary:
-      "A mobile app that turns GPS and sensor data into clear driving insights, gamified safety, and real-time location sharing.",
-    problem:
-      "Existing safety apps (iSharing, Life360, Zenroad) feel either too utilitarian or too consumer — drivers need actionable, motivating insights.",
-    process:
-      "Competitive teardown, sensor-data mapping, scoring model exploration, lo-fi to hi-fi iteration with usability tests on real driving sessions.",
-    solution:
-      "A mobile-first experience with live tracking, geofencing, risky-event detection, and a gamified risk score that nudges safer driving.",
-    outcomes: [
-      "Smarter risk scoring vs. category leaders",
-      "Geofencing + live family sharing",
-      "Gamified safety streaks & rewards",
-      "End-to-end design from research to handoff",
+      "A focused redesign of the Billing module inside Toyota's LIOS — reducing cognitive load, removing dead-clicks and turning a heavy enterprise tool into something teams can actually move through.",
+    tags: ["UX Design", "Enterprise SaaS", "Workflows"],
+    figma: "#",
+    links: [],
+    overview: {
+      problem:
+        "The legacy Billing module was dense, modal-heavy and full of legacy patterns. Operators wasted time hunting fields, and errors compounded across long workflows.",
+      users: [
+        "Toyota logistics operators",
+        "Billing and finance reviewers",
+        "Admins managing exception flows"
+      ],
+      goals: [
+        "Cut the number of steps in the core billing flow",
+        "Surface validation errors earlier",
+        "Modernise the visual layer without breaking muscle memory"
+      ]
+    },
+    process: {
+      research:
+        "Shadowed operators, mapped the legacy task flow, identified dead-clicks and decision bottlenecks. Co-designed solutions with the engineering team.",
+      flows: [
+        "Bill creation → line items → validation → review → submit",
+        "Exception handling and corrections",
+        "Audit + history surfaces"
+      ],
+      wireframes:
+        "Reduced screens, replaced nested modals with inline editing where safe, introduced a sticky summary panel.",
+      designSystem:
+        "Aligned to Toyota's broader visual standards while modernising form components, table density and feedback states."
+    },
+    solution: {
+      features: [
+        "Inline editing for line items, fewer modals",
+        "Sticky billing summary with running totals",
+        "Earlier, contextual validation errors",
+        "Modernised tables with controllable density"
+      ]
+    },
+    impact: [
+      "Reduced billing flow steps and dead-clicks",
+      "Improved scannability of complex tables",
+      "Cleaner foundation for further LIOS modules"
     ],
-    tags: ["Mobile", "IoT", "Gamification"],
-    link: "https://www.figma.com/proto/jTSktrheAh2iqsIXd3xdko/TMA---Mobile?node-id=11769-6015&starting-point-node-id=11769%3A6015",
-  },
+    gallery: [
+      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1400&q=80",
+      "https://images.unsplash.com/photo-1707836916010-3c4ad261936c?w=1400&q=80",
+      "https://images.pexels.com/photos/27141316/pexels-photo-27141316.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+    ]
+  }
 ];
 
 export const personalProjects = [

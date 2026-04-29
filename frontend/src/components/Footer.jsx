@@ -11,6 +11,8 @@ const Footer = () => {
             <div className="eyebrow mb-4">(§) — Get in touch</div>
             <a
               href={`mailto:${profile.email}`}
+              data-cursor="view"
+              data-cursor-label="Email"
               className="display text-[12vw] md:text-[7vw] lg:text-[7.5rem] font-bold leading-[0.92] tracking-[-0.04em] ink hover:text-accent transition-colors block"
             >
               Say hello{"."}

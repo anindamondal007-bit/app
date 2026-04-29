@@ -26,7 +26,10 @@ const PersonalProjects = () => {
               href={p.link}
               target="_blank"
               rel="noreferrer"
-              className="reveal group relative overflow-hidden rounded-lg border border-line bg-surface"
+              data-cursor="view"
+              data-cursor-label="View"
+              className="reveal group relative overflow-hidden bg-surface border border-line proj-card"
+              style={{ borderRadius: "20px" }}
             >
               <div className="aspect-[16/10] overflow-hidden bg-[hsl(var(--ink)/0.04)]">
                 <img

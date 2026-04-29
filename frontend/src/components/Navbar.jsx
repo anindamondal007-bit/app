@@ -67,7 +67,7 @@ const Navbar = () => {
           >
             {dark ? <Sun size={15} /> : <Moon size={15} />}
           </button>
-          <a href={`mailto:${profile.email}`} className="hidden sm:inline-flex btn-primary !py-2 !px-4 !text-[13px]">
+          <a href={`mailto:${profile.email}`} data-cursor="view" data-cursor-label="Email" className="hidden sm:inline-flex btn-primary !py-2 !px-4 !text-[13px]">
             Hire me <ArrowUpRight size={14} />
           </a>
         </div>

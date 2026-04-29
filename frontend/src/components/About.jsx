@@ -1,6 +1,7 @@
 import React from "react";
 import { profile, aboutCopy } from "../mock";
 import { ArrowUpRight } from "lucide-react";
+import Counter from "./Counter";
 
 const About = () => {
   return (
@@ -46,14 +47,16 @@ const About = () => {
             <div className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-6">
               {aboutCopy.highlights.map((h, i) => (
                 <div key={i} className="border-t border-line pt-4">
-                  <div className="display text-3xl md:text-4xl font-semibold ink">{h.value}</div>
+                  <div className="display text-3xl md:text-4xl font-semibold ink">
+                    <Counter value={h.value} />
+                  </div>
                   <div className="mono text-[11px] uppercase tracking-[0.18em] muted mt-1">{h.label}</div>
                 </div>
               ))}
             </div>
 
             <div className="mt-10 flex flex-wrap items-center gap-4">
-              <a href="#contact" className="btn-primary">
+              <a href="#contact" className="btn-primary" data-cursor="view" data-cursor-label="Hire">
                 Let's talk <ArrowUpRight size={16} />
               </a>
               <a

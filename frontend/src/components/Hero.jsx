@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { ArrowDown, ArrowUpRight, MapPin, Sparkles } from "lucide-react";
 import { profile } from "../mock";
+import useMagnetic from "../hooks/useMagnetic";
 
 const rotatingWords = ["intuitive.", "scalable.", "impactful.", "human."];
 
 const Hero = () => {
   const [idx, setIdx] = useState(0);
+  const viewRef = useMagnetic(0.45);
+  const contactRef = useMagnetic(0.45);
   useEffect(() => {
     const t = setInterval(() => setIdx((i) => (i + 1) % rotatingWords.length), 2200);
     return () => clearInterval(t);
@@ -29,12 +32,12 @@ const Hero = () => {
         <div className="grid grid-cols-12 gap-6 items-end">
           <div className="col-span-12 md:col-span-9">
             <div className="eyebrow mb-6">— {profile.title} · {profile.yearsExperience}+ yrs</div>
-            <h1 className="display ink font-bold text-[16vw] md:text-[12vw] lg:text-[10.4rem] leading-[0.88] tracking-[-0.04em]">
-              Aninda<span className="text-accent">.</span>
+            <h1 className="display ink font-bold text-[16vw] md:text-[12vw] lg:text-[10.4rem] leading-[0.88] tracking-[-0.04em] mask-reveal reveal in">
+              <span className="mask-word"><span className="mask-inner">Aninda<span className="text-accent">.</span></span></span>
             </h1>
-            <h2 className="display ink font-bold text-[12vw] md:text-[9vw] lg:text-[8rem] leading-[0.9] tracking-[-0.04em] mt-1 md:mt-2 -ml-[1px]">
-              <span className="muted/40" style={{ color: "hsl(var(--muted) / 0.55)" }}>Sundar</span>{" "}
-              <span>Mondal</span>
+            <h2 className="display ink font-bold text-[12vw] md:text-[9vw] lg:text-[8rem] leading-[0.9] tracking-[-0.04em] mt-1 md:mt-2 -ml-[1px] mask-reveal reveal in">
+              <span className="mask-word"><span className="mask-inner" style={{ transitionDelay: "120ms", color: "hsl(var(--muted) / 0.55)" }}>Sundar&nbsp;</span></span>
+              <span className="mask-word"><span className="mask-inner" style={{ transitionDelay: "240ms" }}>Mondal</span></span>
             </h2>
           </div>
 
@@ -58,10 +61,10 @@ const Hero = () => {
         {/* CTA row */}
         <div className="mt-14 md:mt-20 flex flex-col md:flex-row md:items-center justify-between gap-8">
           <div className="flex flex-wrap items-center gap-3">
-            <a href="#work" className="btn-primary">
+            <a ref={viewRef} href="#work" className="btn-primary" data-cursor="view" data-cursor-label="View">
               View Work <ArrowUpRight size={16} />
             </a>
-            <a href="#contact" className="btn-ghost">
+            <a ref={contactRef} href="#contact" className="btn-ghost" data-cursor="hover">
               Contact Me
             </a>
           </div>

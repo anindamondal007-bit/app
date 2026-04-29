@@ -79,6 +79,8 @@ const Contact = () => {
                 <button
                   type="submit"
                   disabled={submitting}
+                  data-cursor="view"
+                  data-cursor-label={submitting ? "" : "Send"}
                   className="btn-primary disabled:opacity-60"
                 >
                   {submitting ? "Sending…" : "Send message"} <Send size={14} />
