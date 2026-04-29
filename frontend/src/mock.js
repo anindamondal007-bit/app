@@ -235,9 +235,171 @@ export const featuredProjects = [
     ]
   },
   {
+    id: "tma-mobile",
+    slug: "telematics-mobile-app",
+    index: "04",
+    name: "Telematics Mobile App",
+    category: "Mobile App",
+    year: "2024",
+    status: "Shipped",
+    role: "UI/UX Designer",
+    cover:
+      "https://images.unsplash.com/photo-1629697776809-f37ceac39e77?w=1600&q=80",
+    teaser:
+      "A telematics mobile app that turns GPS and sensor data into clear driving insights and gamified safety.",
+    summary:
+      "A mobile app that tracks driving behaviour, detects risky events and assesses risk using GPS and sensor data — with real-time tracking, geofencing, live location sharing, and a smarter, more motivating safety experience than incumbents like iSharing, Life360 and Zenroad.",
+    tags: ["UX Design", "Mobile App", "IoT", "Gamification"],
+    figma: "https://www.figma.com/proto/OYCbhtlP7rN3zTuGqTg7M4/ANINDA-Projects?page-id=0%3A1&node-id=1-6554",
+    links: [],
+    overview: {
+      problem:
+        "Existing safety apps feel either too utilitarian (telematics dashboards) or too consumer (family trackers). Drivers don't get insights they can act on, and families don't get peace of mind they can trust.",
+      users: [
+        "Everyday drivers who want to drive safer",
+        "Families sharing live location for peace of mind",
+        "Fleet drivers using telematics in personal time"
+      ],
+      goals: [
+        "Make raw sensor data feel like clear, actionable insight",
+        "Use gamification to nudge safer driving without nagging",
+        "Match incumbents on tracking, beat them on usability"
+      ]
+    },
+    process: {
+      research:
+        "Competitive teardown of iSharing, Life360 and Zenroad. Mapped sensor & GPS data points to user-facing insights. Validated scoring model with 4 drivers across short trips.",
+      flows: [
+        "Onboarding → permissions → first trip detection",
+        "Trip detail → risky events timeline → score breakdown",
+        "Family circle → live location → geofence alerts"
+      ],
+      wireframes:
+        "Mobile-first, glanceable cards. Tested 3 score visualisation variants before settling on a daily ring + weekly streak pattern.",
+      designSystem:
+        "Calm, trust-forward palette with a single accent for risk highlights. Typography tuned for at-a-glance reading in cars."
+    },
+    solution: {
+      features: [
+        "Real-time tracking with live location sharing",
+        "Geofencing with arrival/departure alerts",
+        "Risky-event detection (harsh braking, sharp turns, speeding)",
+        "Gamified daily safety score and weekly streaks",
+        "Trip history with event timeline and replay"
+      ]
+    },
+    impact: [
+      "Smarter risk-scoring model vs. category leaders",
+      "Family + driver value in one app, not two",
+      "End-to-end design from research to engineering handoff"
+    ],
+    gallery: [
+      "https://images.unsplash.com/photo-1629697776809-f37ceac39e77?w=1400&q=80",
+      "https://images.unsplash.com/photo-1707836916010-3c4ad261936c?w=1400&q=80",
+      "https://images.pexels.com/photos/4724371/pexels-photo-4724371.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+    ]
+  },
+  {
+    id: "fleet-management",
+    slug: "fleet-management",
+    index: "05",
+    name: "Fleet Management Solution",
+    category: "Web Platform",
+    year: "2024",
+    status: "Shipped",
+    role: "UI/UX Designer",
+    cover:
+      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1600&q=80",
+    teaser:
+      "A telematics-powered fleet management ecosystem — one platform, four roles, one source of truth.",
+    summary:
+      "A complete telematics-driven fleet management ecosystem covering Drivers, Fleet Managers, Insurers and an Admin control plane. Each role gets a tailored experience built on a shared design system, all powered by the same real-time vehicle data.",
+    tags: ["UX Design", "Web Platform", "SaaS", "Dashboards", "Telematics"],
+    figma: "https://www.figma.com/proto/OYCbhtlP7rN3zTuGqTg7M4/ANINDA-Projects?page-id=4%3A6067&node-id=4-14245",
+    links: [],
+    overview: {
+      problem:
+        "Fleet operations are fragmented across four very different audiences — drivers in the cab, managers in dispatch, insurers reviewing claims, admins running the platform. Each persona needs a different lens on the same vehicle data, in real time.",
+      users: [
+        "Drivers using mobile + in-cab tools",
+        "Fleet managers monitoring assets and risk",
+        "Insurers processing FNOL and claims",
+        "Platform admins managing access and data"
+      ],
+      goals: [
+        "Build one design system that scales across 4 personas",
+        "Surface persona-specific insights from a shared data layer",
+        "Make compliance (ELD, DVIR) feel calm, not punitive"
+      ]
+    },
+    process: {
+      research:
+        "Stakeholder workshops with each persona, journey mapping across the lifecycle of a single trip, and a deep audit of incumbent telematics tools.",
+      flows: [
+        "Driver: trip lifecycle → DVIR → ELD logs → diagnostics",
+        "Manager: live map → asset detail → risk scoring → reports",
+        "Insurer: FNOL → claim review → driver analytics → CRM",
+        "Admin: org/user management → role permissions → audits"
+      ],
+      wireframes:
+        "Modular, role-aware dashboard system. Same widgets, different priorities per persona. Iterated dense data tables for scannability.",
+      designSystem:
+        "Desktop-first system with a unified component library, reusable widgets and consistent data-vis language across all four modules."
+    },
+    solution: {
+      features: [
+        "Persona-specific dashboards on shared telematics data",
+        "Real-time asset tracking, ELD compliance and DVIR",
+        "AI dashcam workflows and supply-chain insights",
+        "Insurer FNOL alerts with driver behaviour analytics",
+        "Centralised admin panel with full role management"
+      ]
+    },
+    impact: [
+      "Four role-based products on one design system",
+      "Real-time data, persona-specific clarity",
+      "Cleaner compliance experience for drivers"
+    ],
+    gallery: [
+      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1400&q=80",
+      "https://images.unsplash.com/photo-1631093441315-a06b9bcbe63f?w=1400&q=80",
+      "https://images.pexels.com/photos/27141316/pexels-photo-27141316.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+    ],
+    modules: [
+      {
+        name: "Drivers",
+        description:
+          "Route optimization, real-time notifications, ELD mandate compliance, DVIR and vehicle diagnostics.",
+        figma:
+          "https://www.figma.com/proto/OYCbhtlP7rN3zTuGqTg7M4/ANINDA-Projects?page-id=34%3A23588&node-id=34-31412"
+      },
+      {
+        name: "Fleet Managers",
+        description:
+          "AI dashcams, asset tracking, supply chain insights, integration with TMS, HR and dispatch systems.",
+        figma:
+          "https://www.figma.com/proto/OYCbhtlP7rN3zTuGqTg7M4/ANINDA-Projects?page-id=4%3A6067&node-id=4-14245"
+      },
+      {
+        name: "Insurers",
+        description:
+          "Real-time FNOL notifications, driver behaviour analytics, enhanced claim processing and CRM integration.",
+        figma:
+          "https://www.figma.com/proto/OYCbhtlP7rN3zTuGqTg7M4/ANINDA-Projects?page-id=9%3A55797&node-id=9-58852"
+      },
+      {
+        name: "Admin Panel",
+        description:
+          "Centralised interface for admins to access and manage data across all user types — Drivers, Fleet Managers and Insurers — with full visibility and control.",
+        figma:
+          "https://www.figma.com/proto/OYCbhtlP7rN3zTuGqTg7M4/ANINDA-Projects?page-id=9%3A17398&node-id=9-55592"
+      }
+    ]
+  },
+  {
     id: "toyota-lios",
     slug: "toyota-lios",
-    index: "04",
+    index: "06",
     name: "Toyota LIOS Redesign",
     category: "Enterprise SaaS",
     year: "2024",

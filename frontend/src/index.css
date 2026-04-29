@@ -162,6 +162,15 @@
   transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+/* Carousel — hide scrollbar but keep scrollable */
+.carousel-track {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  scroll-behavior: smooth;
+  overscroll-behavior-x: contain;
+}
+.carousel-track::-webkit-scrollbar { display: none; }
+
 /* Page enter transition (fade + slight up) */
 .page-enter {
   animation: pageIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;

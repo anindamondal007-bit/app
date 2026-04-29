@@ -11,11 +11,10 @@ import Skills from "./components/Skills";
 import PersonalProjects from "./components/PersonalProjects";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
-import Cursor from "./components/Cursor";
 import CaseStudy from "./pages/CaseStudy";
+import AllProjects from "./pages/AllProjects";
 
 const Home = () => {
-  // Reveal-on-scroll observer
   useEffect(() => {
     const els = document.querySelectorAll(".reveal");
     const io = new IntersectionObserver(
@@ -35,7 +34,6 @@ const Home = () => {
 
   return (
     <div className="page-enter grain bg-bg ink min-h-screen">
-      <Cursor />
       <Navbar />
       <main>
         <Hero />
@@ -51,7 +49,6 @@ const Home = () => {
   );
 };
 
-// Scroll restoration & route change handler
 const RouteChange = ({ children }) => {
   const location = useLocation();
   useEffect(() => {
@@ -79,6 +76,7 @@ function App() {
         <RouteChange>
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/work" element={<AllProjects />} />
             <Route path="/work/:slug" element={<CaseStudy />} />
           </Routes>
         </RouteChange>

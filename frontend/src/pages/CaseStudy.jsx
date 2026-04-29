@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { ArrowLeft, ArrowUpRight, ExternalLink } from "lucide-react";
 import { featuredProjects } from "../mock";
-import Cursor from "../components/Cursor";
 import Footer from "../components/Footer";
 
 const CaseStudy = () => {
@@ -46,8 +45,6 @@ const CaseStudy = () => {
 
   return (
     <div className="page-enter grain bg-bg ink min-h-screen">
-      <Cursor />
-
       {/* Top bar */}
       <header className="container-x flex items-center justify-between h-16">
         <button
@@ -179,8 +176,43 @@ const CaseStudy = () => {
         </div>
       </Section>
 
+      {/* Modules (Fleet Management) */}
+      {project.modules && project.modules.length > 0 && (
+        <Section eyebrow="03 — Modules" title="Four roles, one platform.">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            {project.modules.map((m, i) => (
+              <a
+                key={m.name}
+                href={m.figma}
+                target="_blank"
+                rel="noreferrer"
+                className="reveal proj-card group block bg-surface border border-line p-7"
+                style={{ borderRadius: "20px", transitionDelay: `${i * 80}ms` }}
+              >
+                <div className="flex items-start justify-between mb-3">
+                  <div>
+                    <span className="mono text-[11px] uppercase tracking-[0.2em] muted">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <h3 className="display text-2xl font-semibold ink mt-1">{m.name}</h3>
+                  </div>
+                  <ArrowUpRight
+                    size={20}
+                    className="ink-soft group-hover:text-accent group-hover:rotate-[12deg] transition-all duration-300"
+                  />
+                </div>
+                <p className="ink-soft text-[15px] leading-relaxed">{m.description}</p>
+                <div className="mt-5 inline-flex items-center gap-2 mono text-[11px] uppercase tracking-[0.2em] ink group-hover:text-accent transition-colors">
+                  Open Figma prototype <ExternalLink size={12} />
+                </div>
+              </a>
+            ))}
+          </div>
+        </Section>
+      )}
+
       {/* Solution */}
-      <Section eyebrow="03 — Solution" title="What got built.">
+      <Section eyebrow={project.modules ? "04 — Solution" : "03 — Solution"} title="What got built.">
         <div className="grid grid-cols-12 gap-8">
           <div className="col-span-12 md:col-span-5">
             <h3 className="mono text-[11px] uppercase tracking-[0.22em] muted mb-4">Key features</h3>
@@ -211,7 +243,7 @@ const CaseStudy = () => {
       </Section>
 
       {/* Impact */}
-      <Section eyebrow="04 — Impact" title="Outcomes that mattered.">
+      <Section eyebrow={project.modules ? "05 — Impact" : "04 — Impact"} title="Outcomes that mattered.">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           {project.impact.map((o, i) => (
             <div

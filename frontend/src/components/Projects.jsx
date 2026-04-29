@@ -1,15 +1,45 @@
-import React, { useRef } from "react";
-import { ArrowUpRight } from "lucide-react";
+import React, { useRef, useEffect, useState } from "react";
+import { ArrowUpRight, ArrowLeft, ArrowRight, LayoutGrid } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { featuredProjects } from "../mock";
 
 const Projects = () => {
   const navigate = useNavigate();
+  const trackRef = useRef(null);
+  const [canPrev, setCanPrev] = useState(false);
+  const [canNext, setCanNext] = useState(true);
+
+  // Update arrow disabled state on scroll
+  useEffect(() => {
+    const el = trackRef.current;
+    if (!el) return;
+    const update = () => {
+      setCanPrev(el.scrollLeft > 4);
+      setCanNext(el.scrollLeft + el.clientWidth < el.scrollWidth - 4);
+    };
+    update();
+    el.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    return () => {
+      el.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+    };
+  }, []);
+
+  const scrollByCard = (dir) => {
+    const el = trackRef.current;
+    if (!el) return;
+    // Scroll by ~one card width (card 420px + gap 24px = 444 on md+)
+    const card = el.querySelector(".carousel-card");
+    const step = card ? card.getBoundingClientRect().width + 24 : 440;
+    el.scrollBy({ left: dir * step, behavior: "smooth" });
+  };
+
   return (
     <section id="work" className="py-24 md:py-32 border-t border-line">
       <div className="container-x">
         {/* Header */}
-        <div className="flex items-end justify-between mb-12 md:mb-16">
+        <div className="flex items-end justify-between mb-12 md:mb-16 gap-8">
           <div>
             <div className="eyebrow mb-4">(02) — Selected Work</div>
             <h2 className="display text-[12vw] md:text-[6vw] lg:text-[6.4rem] font-bold leading-[0.92] tracking-[-0.03em] ink">
@@ -17,103 +47,143 @@ const Projects = () => {
               <span style={{ color: "hsl(var(--muted) / 0.55)" }}>case studies.</span>
             </h2>
           </div>
-          <div className="hidden md:block max-w-xs">
+          <div className="hidden md:flex items-end gap-6 max-w-md">
             <p className="ink-soft text-[15px] leading-relaxed">
               Real products I shipped end-to-end. Each story covers the messy middle — problem, process, decisions and outcome.
             </p>
+            <div className="flex items-center gap-2 shrink-0">
+              <ArrowBtn disabled={!canPrev} onClick={() => scrollByCard(-1)} aria-label="Previous">
+                <ArrowLeft size={16} />
+              </ArrowBtn>
+              <ArrowBtn disabled={!canNext} onClick={() => scrollByCard(1)} aria-label="Next">
+                <ArrowRight size={16} />
+              </ArrowBtn>
+            </div>
           </div>
         </div>
+      </div>
 
-        {/* Single vertical flow of case-study cards */}
-        <div className="space-y-8 md:space-y-10">
-          {featuredProjects.map((p, i) => (
-            <ProjectCard key={p.id} project={p} index={i} onOpen={() => navigate(`/work/${p.slug}`)} />
-          ))}
-        </div>
+      {/* Carousel track — full bleed scroll, but inner cards align to container */}
+      <div
+        ref={trackRef}
+        className="carousel-track flex gap-6 overflow-x-auto pb-4 px-6 md:px-10 lg:px-[max(2.5rem,calc((100vw-1280px)/2+2.5rem))]"
+        style={{
+          scrollSnapType: "x mandatory",
+          scrollPaddingLeft: "max(1.5rem, calc((100vw - 1280px) / 2 + 2.5rem))",
+        }}
+      >
+        {featuredProjects.map((p) => (
+          <CarouselCard
+            key={p.id}
+            project={p}
+            onOpen={() => navigate(`/work/${p.slug}`)}
+          />
+        ))}
+        {/* View All card at the end */}
+        <ViewAllCard onClick={() => navigate("/work")} />
+      </div>
+
+      {/* Mobile arrows below */}
+      <div className="container-x mt-6 flex md:hidden items-center justify-end gap-2">
+        <ArrowBtn disabled={!canPrev} onClick={() => scrollByCard(-1)} aria-label="Previous">
+          <ArrowLeft size={16} />
+        </ArrowBtn>
+        <ArrowBtn disabled={!canNext} onClick={() => scrollByCard(1)} aria-label="Next">
+          <ArrowRight size={16} />
+        </ArrowBtn>
       </div>
     </section>
   );
 };
 
-const ProjectCard = ({ project, index, onOpen }) => {
-  const ref = useRef(null);
-
-  // Subtle 3D tilt on mouse move (desktop)
-  const onMove = (e) => {
-    if (!ref.current) return;
-    if (window.matchMedia("(pointer: coarse)").matches) return;
-    const rect = ref.current.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width - 0.5;
-    const y = (e.clientY - rect.top) / rect.height - 0.5;
-    const img = ref.current.querySelector(".cover-img");
-    if (img) {
-      img.style.transform = `scale(1.04) translate3d(${x * -12}px, ${y * -12}px, 0)`;
-    }
-  };
-  const onLeave = () => {
-    const img = ref.current?.querySelector(".cover-img");
-    if (img) img.style.transform = "scale(1) translate3d(0,0,0)";
-  };
-
+const CarouselCard = ({ project, onOpen }) => {
   return (
     <article
-      ref={ref}
-      onMouseMove={onMove}
-      onMouseLeave={onLeave}
       onClick={onOpen}
-      data-cursor="view"
-      data-cursor-label="Case study"
-      className="reveal proj-card group relative overflow-hidden cursor-pointer bg-surface border border-line"
-      style={{
-        borderRadius: "24px",
-        transitionDelay: `${index * 80}ms`,
-      }}
+      className="carousel-card proj-card group relative shrink-0 cursor-pointer bg-surface border border-line overflow-hidden flex flex-col w-[300px] sm:w-[360px] md:w-[420px]"
+      style={{ borderRadius: "20px", scrollSnapAlign: "start" }}
     >
-      <div className="grid grid-cols-12 gap-0 md:gap-2 items-stretch">
-        {/* Left: copy */}
-        <div className="col-span-12 md:col-span-5 p-7 md:p-10 lg:p-12 flex flex-col">
-          <div className="flex items-center justify-between mb-6">
-            <span className="mono text-[11px] uppercase tracking-[0.22em] muted">{project.index} · {project.year}</span>
-            <StatusPill status={project.status} />
-          </div>
-
-          <h3 className="display text-3xl md:text-4xl lg:text-5xl font-semibold tracking-[-0.02em] ink leading-[1.02]">
-            {project.name}
-          </h3>
-
-          <p className="mt-4 ink-soft text-[15.5px] leading-relaxed max-w-md">
-            {project.teaser}
-          </p>
-
-          <div className="mt-6 flex flex-wrap gap-2">
-            <span className="mono text-[10.5px] uppercase tracking-[0.16em] px-3 py-1.5 rounded-full bg-[hsl(var(--ink)/0.06)] ink-soft">
-              {project.category}
-            </span>
-          </div>
-
-          <div className="mt-auto pt-8 flex items-center gap-2 ink group-hover:text-accent transition-colors">
-            <span className="mono text-[12px] uppercase tracking-[0.2em] font-medium">View case study</span>
-            <ArrowUpRight
-              size={18}
-              className="transition-transform duration-300 group-hover:rotate-[12deg] group-hover:translate-x-0.5"
-            />
-          </div>
+      {/* Image */}
+      <div className="relative overflow-hidden m-3 mb-0" style={{ borderRadius: "14px" }}>
+        <div className="aspect-[4/3] bg-[hsl(var(--ink)/0.04)] overflow-hidden">
+          <img
+            src={project.cover}
+            alt={project.name}
+            className="cover-img w-full h-full object-cover transition-transform duration-700 ease-out"
+          />
         </div>
+        <div className="absolute top-3 left-3">
+          <StatusPill status={project.status} />
+        </div>
+      </div>
 
-        {/* Right: image */}
-        <div className="col-span-12 md:col-span-7 relative overflow-hidden m-0 md:m-3" style={{ borderRadius: "16px" }}>
-          <div className="aspect-[4/3] md:aspect-[16/11] overflow-hidden bg-[hsl(var(--ink)/0.04)] rounded-[16px]">
-            <img
-              src={project.cover}
-              alt={project.name}
-              className="cover-img w-full h-full object-cover transition-transform duration-700 ease-out"
-            />
-          </div>
+      {/* Body */}
+      <div className="p-6 md:p-7 flex-1 flex flex-col">
+        <div className="flex items-center justify-between mb-3">
+          <span className="mono text-[10.5px] uppercase tracking-[0.2em] muted">
+            {project.index} · {project.year}
+          </span>
+          <span className="mono text-[10.5px] uppercase tracking-[0.18em] px-2.5 py-1 rounded-full bg-[hsl(var(--ink)/0.06)] ink-soft">
+            {project.category}
+          </span>
+        </div>
+        <h3 className="display text-2xl md:text-[1.75rem] font-semibold tracking-[-0.02em] ink leading-[1.1]">
+          {project.name}
+        </h3>
+        <p className="mt-3 ink-soft text-[14.5px] leading-relaxed line-clamp-3">
+          {project.teaser}
+        </p>
+        <div className="mt-auto pt-6 flex items-center gap-2 ink group-hover:text-accent transition-colors">
+          <span className="mono text-[11px] uppercase tracking-[0.2em] font-medium">View case study</span>
+          <ArrowUpRight
+            size={16}
+            className="transition-transform duration-300 group-hover:rotate-[12deg] group-hover:translate-x-0.5"
+          />
         </div>
       </div>
     </article>
   );
 };
+
+const ViewAllCard = ({ onClick }) => (
+  <button
+    onClick={onClick}
+    className="carousel-card group shrink-0 bg-[hsl(var(--ink))] text-[hsl(var(--bg))] border border-line overflow-hidden flex flex-col items-start justify-between text-left p-7 md:p-8 w-[300px] sm:w-[360px] md:w-[420px] transition-all duration-500 hover:-translate-y-1.5"
+    style={{ borderRadius: "20px", scrollSnapAlign: "start", boxShadow: "0 8px 24px -12px hsl(var(--ink) / 0.2)" }}
+  >
+    <div className="flex items-center gap-3">
+      <span className="h-10 w-10 grid place-items-center rounded-full border border-[hsl(var(--bg)/0.25)]">
+        <LayoutGrid size={18} />
+      </span>
+      <span className="mono text-[10.5px] uppercase tracking-[0.22em] opacity-70">All Projects</span>
+    </div>
+    <div className="mt-12">
+      <h3 className="display text-3xl md:text-[2.4rem] font-semibold tracking-[-0.02em] leading-[1.05]">
+        Browse the<br />full archive.
+      </h3>
+      <p className="mt-3 text-[14.5px] leading-relaxed opacity-75 max-w-xs">
+        Six case studies, one place. Open the gallery to scroll through every shipped product.
+      </p>
+    </div>
+    <div className="mt-8 inline-flex items-center gap-2 group-hover:text-accent transition-colors">
+      <span className="mono text-[11px] uppercase tracking-[0.2em] font-medium">View all</span>
+      <ArrowUpRight
+        size={16}
+        className="transition-transform duration-300 group-hover:rotate-[12deg] group-hover:translate-x-0.5"
+      />
+    </div>
+  </button>
+);
+
+const ArrowBtn = ({ children, disabled, ...rest }) => (
+  <button
+    {...rest}
+    disabled={disabled}
+    className="h-10 w-10 grid place-items-center rounded-full border border-line ink hover:bg-ink hover:text-[hsl(var(--bg))] disabled:opacity-30 disabled:cursor-not-allowed transition-colors duration-200"
+  >
+    {children}
+  </button>
+);
 
 const StatusPill = ({ status }) => {
   const map = {
@@ -123,7 +193,7 @@ const StatusPill = ({ status }) => {
   };
   const cfg = map[status] || map.Live;
   return (
-    <span className="inline-flex items-center gap-1.5 mono text-[10.5px] uppercase tracking-[0.18em] muted">
+    <span className="inline-flex items-center gap-1.5 mono text-[10px] uppercase tracking-[0.18em] ink bg-surface/80 backdrop-blur px-2.5 py-1 rounded-full border border-line">
       <span className="h-1.5 w-1.5 rounded-full" style={{ background: cfg.dot }} />
       {cfg.label}
     </span>
