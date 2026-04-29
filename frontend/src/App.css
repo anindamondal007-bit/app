@@ -1,0 +1,2 @@
+/* Component-level overrides only. Global tokens live in index.css */
+.App { min-height: 100vh; }
