@@ -3,6 +3,7 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import { ArrowLeft, ArrowUpRight, ExternalLink } from "lucide-react";
 import { featuredProjects } from "../mock";
 import Footer from "../components/Footer";
+import MockupBand from "../components/MockupBand";
 
 const CaseStudy = () => {
   const { slug } = useParams();
@@ -119,11 +120,18 @@ const CaseStudy = () => {
 
         {/* Cover image */}
         <div
-          className="reveal mt-12 md:mt-16 overflow-hidden bg-[hsl(var(--ink)/0.04)]"
-          style={{ borderRadius: "20px" }}
+          className="reveal mt-12 md:mt-16 overflow-hidden"
+          style={{
+            borderRadius: "20px",
+            background: project.bgTint || "hsl(var(--ink) / 0.04)",
+          }}
         >
-          <div className="aspect-[16/9] md:aspect-[16/8]">
-            <img src={project.cover} alt={project.name} className="w-full h-full object-cover" />
+          <div className="aspect-[16/9] md:aspect-[16/8] grid place-items-center p-8 md:p-14">
+            <img
+              src={project.cover}
+              alt={project.name}
+              className="max-h-full max-w-full object-contain drop-shadow-[0_28px_60px_rgba(11,27,58,0.20)]"
+            />
           </div>
         </div>
       </section>
@@ -213,34 +221,36 @@ const CaseStudy = () => {
 
       {/* Solution */}
       <Section eyebrow={project.modules ? "04 — Solution" : "03 — Solution"} title="What got built.">
-        <div className="grid grid-cols-12 gap-8">
-          <div className="col-span-12 md:col-span-5">
-            <h3 className="mono text-[11px] uppercase tracking-[0.22em] muted mb-4">Key features</h3>
-            <ul className="space-y-3">
-              {project.solution.features.map((f, i) => (
-                <li key={i} className="flex items-start gap-3 text-[16px] ink-soft">
-                  <span className="text-accent mt-1.5 shrink-0">◆</span>
-                  <span>{f}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="col-span-12 md:col-span-7">
-            <h3 className="mono text-[11px] uppercase tracking-[0.22em] muted mb-4">Selected screens</h3>
-            <div className="grid grid-cols-2 gap-4">
-              {project.gallery.map((g, i) => (
-                <div
-                  key={i}
-                  className={`reveal overflow-hidden bg-[hsl(var(--ink)/0.04)] ${i === 0 ? "col-span-2 aspect-[16/9]" : "aspect-[4/5]"}`}
-                  style={{ borderRadius: "16px", transitionDelay: `${i * 90}ms` }}
-                >
-                  <img src={g} alt={`${project.name} screen ${i + 1}`} className="w-full h-full object-cover hover:scale-[1.04] transition-transform duration-700" />
-                </div>
-              ))}
-            </div>
-          </div>
+        <div>
+          <h3 className="mono text-[11px] uppercase tracking-[0.22em] muted mb-4">Key features</h3>
+          <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-3 max-w-3xl">
+            {project.solution.features.map((f, i) => (
+              <li key={i} className="flex items-start gap-3 text-[16px] ink-soft">
+                <span className="text-accent mt-1.5 shrink-0">◆</span>
+                <span>{f}</span>
+              </li>
+            ))}
+          </ul>
         </div>
       </Section>
+
+      {/* Selected screens — full-bleed auto-scrolling mockup band */}
+      <section className="py-16 md:py-24 border-t border-line overflow-hidden">
+        <div className="container-x mb-10 md:mb-14 reveal">
+          <div className="flex items-end justify-between gap-6 flex-wrap">
+            <div>
+              <div className="eyebrow mb-3">Selected screens</div>
+              <h2 className="display text-[8vw] md:text-[3.4vw] lg:text-[3.6rem] font-semibold leading-[1.02] tracking-[-0.02em] ink">
+                A glimpse of the work.
+              </h2>
+            </div>
+            <p className="mono text-[11px] uppercase tracking-[0.22em] muted">
+              {project.gallery.length} screens · auto-scroll · hover to pause
+            </p>
+          </div>
+        </div>
+        <MockupBand images={project.gallery} speed={70} />
+      </section>
 
       {/* Impact */}
       <Section eyebrow={project.modules ? "05 — Impact" : "04 — Impact"} title="Outcomes that mattered.">

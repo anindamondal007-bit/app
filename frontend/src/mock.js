@@ -50,6 +50,8 @@ export const featuredProjects = [
     status: "Live",
     role: "Lead UI/UX Designer",
     cover: drive("11ALDSOgmV_VCNauDhDtXJMIF7_OA99Gc"),
+    bgTint:
+      "radial-gradient(120% 90% at 20% 20%, #F5EAFE 0%, #FBF2FF 45%, #F9F5FF 100%)",
     teaser:
       "A mobile app for families to discover and book trusted babysitters and elder-care professionals.",
     summary:
@@ -122,6 +124,8 @@ export const featuredProjects = [
     status: "Live",
     role: "Lead UI/UX Designer",
     cover: drive("1JK7npvu3yUpdPvGBaG4tChhFI_uE1E7f"),
+    bgTint:
+      "radial-gradient(120% 90% at 80% 20%, #EDE3FF 0%, #F5EFFF 45%, #FAF6FF 100%)",
     teaser:
       "A companion app for caregivers to discover jobs, manage bookings and deliver services confidently.",
     summary:
@@ -194,6 +198,8 @@ export const featuredProjects = [
     status: "Ongoing",
     role: "UI/UX Designer",
     cover: drive("1YpYcjLu6aGuG4k3eVH9LOOAKZrf5iyHt"),
+    bgTint:
+      "radial-gradient(120% 100% at 50% 0%, #EAEAFE 0%, #F1EEFB 45%, #F5F2FB 100%)",
     teaser:
       "A desktop platform for job discovery and multi-role dashboards across the care ecosystem.",
     summary:
@@ -261,6 +267,8 @@ export const featuredProjects = [
     status: "Shipped",
     role: "UI/UX Designer",
     cover: drive("1sV0f8Ri5D-IN2jyVrbozGdDNr9wRiqot"),
+    bgTint:
+      "radial-gradient(120% 90% at 20% 80%, #DDE7F6 0%, #ECF1F8 45%, #F2F5F9 100%)",
     teaser:
       "A telematics mobile app that turns GPS and sensor data into clear driving insights and gamified safety.",
     summary:
@@ -327,6 +335,8 @@ export const featuredProjects = [
     status: "Shipped",
     role: "UI/UX Designer",
     cover: drive("14wbd9DZLOxZbkMoWNIv_xOlbdgfya1xZ"),
+    bgTint:
+      "radial-gradient(120% 100% at 80% 20%, #DEE7F2 0%, #ECF1F8 45%, #F1F4F8 100%)",
     teaser:
       "A telematics-powered fleet management ecosystem — one platform, four roles, one source of truth.",
     summary:

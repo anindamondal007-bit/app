@@ -104,12 +104,19 @@ const CarouselCard = ({ project, onOpen }) => {
       style={{ borderRadius: "20px", scrollSnapAlign: "start" }}
     >
       {/* Image */}
-      <div className="relative overflow-hidden m-3 mb-0" style={{ borderRadius: "14px" }}>
-        <div className="aspect-[4/3] bg-[hsl(var(--ink)/0.04)] overflow-hidden">
+      <div
+        className="relative overflow-hidden m-3 mb-0"
+        style={{
+          borderRadius: "14px",
+          background: project.bgTint || "hsl(var(--ink) / 0.04)",
+        }}
+      >
+        <div className="aspect-[4/3] overflow-hidden grid place-items-center p-5 md:p-7">
           <img
             src={project.cover}
             alt={project.name}
-            className="cover-img w-full h-full object-cover transition-transform duration-700 ease-out"
+            loading="lazy"
+            className="cover-img max-h-full max-w-full object-contain transition-transform duration-700 ease-out drop-shadow-[0_18px_40px_rgba(11,27,58,0.18)]"
           />
         </div>
         <div className="absolute top-3 left-3">

@@ -67,12 +67,19 @@ const AllProjects = () => {
             >
               <div className="grid grid-cols-12 gap-0">
                 {/* Image */}
-                <div className="col-span-12 md:col-span-4 m-3 md:m-3 overflow-hidden" style={{ borderRadius: "14px" }}>
-                  <div className="aspect-[4/3] bg-[hsl(var(--ink)/0.04)] overflow-hidden">
+                <div
+                  className="col-span-12 md:col-span-4 m-3 md:m-3 overflow-hidden"
+                  style={{
+                    borderRadius: "14px",
+                    background: p.bgTint || "hsl(var(--ink) / 0.04)",
+                  }}
+                >
+                  <div className="aspect-[4/3] overflow-hidden grid place-items-center p-5 md:p-6">
                     <img
                       src={p.cover}
                       alt={p.name}
-                      className="cover-img w-full h-full object-cover transition-transform duration-700 ease-out"
+                      loading="lazy"
+                      className="cover-img max-h-full max-w-full object-contain transition-transform duration-700 ease-out drop-shadow-[0_16px_36px_rgba(11,27,58,0.16)]"
                     />
                   </div>
                 </div>
