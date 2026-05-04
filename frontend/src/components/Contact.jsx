@@ -1,31 +1,12 @@
-import React, { useState } from "react";
-import { ArrowUpRight, Mail, Phone, MapPin, Send } from "lucide-react";
+import React from "react";
+import { ArrowUpRight, Mail, Phone, MapPin, MessageCircle } from "lucide-react";
 import { profile } from "../mock";
-import { toast } from "sonner";
+
+// Build wa.me link from phone number — strip anything non-numeric.
+const waNumber = profile.phone.replace(/\D/g, "");
+const waLink = `https://wa.me/${waNumber}`;
 
 const Contact = () => {
-  const [form, setForm] = useState({ name: "", email: "", company: "", budget: "", message: "" });
-  const [submitting, setSubmitting] = useState(false);
-
-  const update = (k) => (e) => setForm({ ...form, [k]: e.target.value });
-
-  const onSubmit = async (e) => {
-    e.preventDefault();
-    if (!form.name || !form.email || !form.message) {
-      toast.error("Please fill in name, email and message.");
-      return;
-    }
-    setSubmitting(true);
-    // Mock submit — store in localStorage so the action feels real until backend is wired.
-    const all = JSON.parse(localStorage.getItem("asm-messages") || "[]");
-    all.unshift({ ...form, at: new Date().toISOString() });
-    localStorage.setItem("asm-messages", JSON.stringify(all));
-    await new Promise((r) => setTimeout(r, 700));
-    setSubmitting(false);
-    setForm({ name: "", email: "", company: "", budget: "", message: "" });
-    toast.success("Message sent. I'll get back within 24 hours.");
-  };
-
   return (
     <section id="contact" className="py-24 md:py-32 border-t border-line">
       <div className="container-x">
@@ -47,46 +28,39 @@ const Contact = () => {
             </div>
           </div>
 
+          {/* Right: single CTA panel */}
           <div className="col-span-12 md:col-span-7 reveal">
-            <form
-              onSubmit={onSubmit}
-              className="bg-surface border border-line rounded-lg p-6 md:p-10"
+            <div
+              className="bg-surface border border-line p-8 md:p-12 flex flex-col items-start justify-between min-h-[420px]"
+              style={{ borderRadius: "20px" }}
             >
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                <Field label="Your name" value={form.name} onChange={update("name")} placeholder="Jane Doe" required />
-                <Field label="Email" type="email" value={form.email} onChange={update("email")} placeholder="jane@studio.com" required />
-                <Field label="Company / Team" value={form.company} onChange={update("company")} placeholder="Optional" />
-                <Field label="Budget" value={form.budget} onChange={update("budget")} placeholder="e.g. $5k – $15k" />
-              </div>
-              <div className="mt-5">
-                <label className="mono text-[11px] uppercase tracking-[0.22em] muted">
-                  Tell me about your project
-                </label>
-                <textarea
-                  required
-                  value={form.message}
-                  onChange={update("message")}
-                  rows={5}
-                  placeholder="What problem are we solving? Timeline, scope, anything that helps."
-                  className="mt-2 w-full bg-transparent outline-none border-b py-3 text-[15px] ink placeholder:text-[hsl(var(--muted))] focus:border-[hsl(var(--ink))] transition-colors"
-                  style={{ borderColor: "hsl(var(--line))" }}
-                />
-              </div>
-              <div className="mt-8 flex flex-wrap items-center justify-between gap-4">
-                <p className="text-[12.5px] muted max-w-xs">
-                  Average reply time — within 24 hours, Mon–Fri.
+              <div>
+                <span className="inline-flex items-center gap-2 mono text-[11px] uppercase tracking-[0.22em] muted">
+                  <span className="h-1.5 w-1.5 rounded-full bg-accent animate-pulse" />
+                  Available for new projects
+                </span>
+                <h3 className="display text-3xl md:text-4xl lg:text-[2.8rem] font-semibold leading-[1.08] tracking-[-0.02em] ink mt-6 max-w-xl">
+                  Have a product in mind? Send me a message on WhatsApp — I usually reply within a few hours.
+                </h3>
+                <p className="mt-5 ink-soft text-[15.5px] leading-relaxed max-w-md">
+                  Briefly share what you're building, your timeline and any context. I'll get back with next steps.
                 </p>
-                <button
-                  type="submit"
-                  disabled={submitting}
-                  data-cursor="view"
-                  data-cursor-label={submitting ? "" : "Send"}
-                  className="btn-primary disabled:opacity-60"
-                >
-                  {submitting ? "Sending…" : "Send message"} <Send size={14} />
-                </button>
               </div>
-            </form>
+
+              <div className="mt-10 flex flex-wrap items-center gap-4">
+                <a
+                  href={waLink}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="btn-primary"
+                >
+                  <MessageCircle size={16} /> Send Message
+                </a>
+                <span className="mono text-[11px] uppercase tracking-[0.2em] muted">
+                  Opens WhatsApp · {profile.phone}
+                </span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -115,20 +89,5 @@ const ContactRow = ({ icon, label, value, href, external }) => {
     </Tag>
   );
 };
-
-const Field = ({ label, type = "text", value, onChange, placeholder, required }) => (
-  <div>
-    <label className="mono text-[11px] uppercase tracking-[0.22em] muted">{label}{required && <span className="text-accent">*</span>}</label>
-    <input
-      type={type}
-      value={value}
-      onChange={onChange}
-      placeholder={placeholder}
-      required={required}
-      className="mt-2 w-full bg-transparent outline-none border-b py-2.5 text-[15px] ink placeholder:text-[hsl(var(--muted))] focus:border-[hsl(var(--ink))] transition-colors"
-      style={{ borderColor: "hsl(var(--line))" }}
-    />
-  </div>
-);
 
 export default Contact;
