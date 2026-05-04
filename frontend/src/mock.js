@@ -1,6 +1,13 @@
 // Mock data for Aninda Sundar Mondal's portfolio.
 // All copy, projects, skills, experience are stored here for easy backend wiring later.
 
+// Helper: convert a Google Drive file ID into an embeddable image URL.
+// Routes through our backend image proxy which fetches from Drive,
+// resizes to JPEG and serves same-origin (avoids Chrome's ORB block).
+const BACKEND = process.env.REACT_APP_BACKEND_URL || "";
+const drive = (id, w = 1600) =>
+  `${BACKEND}/api/img/${id}?w=${w}`;
+
 export const profile = {
   name: "Aninda Sundar Mondal",
   firstName: "Aninda",
@@ -42,8 +49,7 @@ export const featuredProjects = [
     year: "2025",
     status: "Live",
     role: "Lead UI/UX Designer",
-    cover:
-      "https://images.unsplash.com/photo-1591608517093-3bb6aa9efe35?w=1600&q=80",
+    cover: drive("11ALDSOgmV_VCNauDhDtXJMIF7_OA99Gc"),
     teaser:
       "A mobile app for families to discover and book trusted babysitters and elder-care professionals.",
     summary:
@@ -97,9 +103,13 @@ export const featuredProjects = [
       "Reused design tokens cut Companion-app design time by ~40%"
     ],
     gallery: [
-      "https://images.unsplash.com/photo-1591608517093-3bb6aa9efe35?w=1400&q=80",
-      "https://images.unsplash.com/photo-1707836916010-3c4ad261936c?w=1400&q=80",
-      "https://images.pexels.com/photos/4724371/pexels-photo-4724371.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+      drive("1yU2mCkwFmC78WShELzsGylmVw845qNE6"),
+      drive("1rMrZWO4YBFKMtjDiumEPPXFqjdC_E4eP"),
+      drive("1u1gxOVu4ugb9wm30-Xdczgxx-SzKxSHf"),
+      drive("1sYImawRscOQ46-lOi-cjDXxNEZsXtYlV"),
+      drive("14n81ziQNTxgg9S53sr-BQaoeG7UfGW1n"),
+      drive("1CvvUE1vo6cXZ65q3kqkvfoS_EhAnB2CU"),
+      drive("1TV7eg9xB5FkApZFUftb0a3IdJjnJYId1")
     ]
   },
   {
@@ -111,8 +121,7 @@ export const featuredProjects = [
     year: "2025",
     status: "Live",
     role: "Lead UI/UX Designer",
-    cover:
-      "https://images.unsplash.com/photo-1629697776809-f37ceac39e77?w=1600&q=80",
+    cover: drive("1JK7npvu3yUpdPvGBaG4tChhFI_uE1E7f"),
     teaser:
       "A companion app for caregivers to discover jobs, manage bookings and deliver services confidently.",
     summary:
@@ -165,9 +174,14 @@ export const featuredProjects = [
       "Unified visual language with the Customer app"
     ],
     gallery: [
-      "https://images.unsplash.com/photo-1629697776809-f37ceac39e77?w=1400&q=80",
-      "https://images.unsplash.com/photo-1620856902651-ce18d6d31d42?w=1400&q=80",
-      "https://images.pexels.com/photos/196646/pexels-photo-196646.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+      drive("16_GC8zQyjHtW2PaGasigAU1C_BDUzIDf"),
+      drive("1EbgjcVJX9ehFHAYif0bso8c0rMfZZgn0"),
+      drive("1yqHwf_gqcuRDKr1A4wcHepm0ynRzyw-C"),
+      drive("1WLgmVGS9VKZdysHxCYKJMcKXzSgH57MQ"),
+      drive("1BWLVZWYr0VPNspD_hvQZ7R93-P-wPWz8"),
+      drive("1egv0GiDa1hJICPxZGMHVipf_Qad75gk-"),
+      drive("1VaLVZBZGaA88DcE8X1Ko2Qpzc4gs1m0p"),
+      drive("198uySWnXdqDvji6lGpkyin0OaXqzM7-J")
     ]
   },
   {
@@ -179,8 +193,7 @@ export const featuredProjects = [
     year: "2025",
     status: "Ongoing",
     role: "UI/UX Designer",
-    cover:
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1600&q=80",
+    cover: drive("1YpYcjLu6aGuG4k3eVH9LOOAKZrf5iyHt"),
     teaser:
       "A desktop platform for job discovery and multi-role dashboards across the care ecosystem.",
     summary:
@@ -229,9 +242,13 @@ export const featuredProjects = [
       "In active development with engineering"
     ],
     gallery: [
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1400&q=80",
-      "https://images.unsplash.com/photo-1631093441315-a06b9bcbe63f?w=1400&q=80",
-      "https://images.pexels.com/photos/27141316/pexels-photo-27141316.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+      drive("1YpYcjLu6aGuG4k3eVH9LOOAKZrf5iyHt"),
+      drive("1G3ixrg_zoghGtS28qX6GjBK2tZPpI0eh"),
+      drive("1x9tnB-IbEAMMN9ZfKqaCvk66s9E-3wft"),
+      drive("1zAYb03ZdvkcOmIKL9BjR6VNTQEcLMjmY"),
+      drive("10MFTt1qdf9lHeDxuNmFK5c063RgvYZqw"),
+      drive("1_fa_6TTHorZ3LAyZRusyAePOSHJDcjj0"),
+      drive("1LL9jjLVxqMln-YdM-L54k-DFHDkZBV1m")
     ]
   },
   {
@@ -243,8 +260,7 @@ export const featuredProjects = [
     year: "2024",
     status: "Shipped",
     role: "UI/UX Designer",
-    cover:
-      "https://images.unsplash.com/photo-1629697776809-f37ceac39e77?w=1600&q=80",
+    cover: drive("1sV0f8Ri5D-IN2jyVrbozGdDNr9wRiqot"),
     teaser:
       "A telematics mobile app that turns GPS and sensor data into clear driving insights and gamified safety.",
     summary:
@@ -294,9 +310,11 @@ export const featuredProjects = [
       "End-to-end design from research to engineering handoff"
     ],
     gallery: [
-      "https://images.unsplash.com/photo-1629697776809-f37ceac39e77?w=1400&q=80",
-      "https://images.unsplash.com/photo-1707836916010-3c4ad261936c?w=1400&q=80",
-      "https://images.pexels.com/photos/4724371/pexels-photo-4724371.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+      drive("1sV0f8Ri5D-IN2jyVrbozGdDNr9wRiqot"),
+      drive("1R-Ufi9fqj9LN-z7RRmRIuJ_PDP1bv4v-"),
+      drive("1jMziIhcjv7JWKUE1UvpHdd4Bb1PEfW1Y"),
+      drive("1Yr7gC2FRWBsMBG3DUyV-4NNFfNGjcclH"),
+      drive("1rxt0MOVW6kFuiGhhF7MLXj25tL2LiZXD")
     ]
   },
   {
@@ -308,8 +326,7 @@ export const featuredProjects = [
     year: "2024",
     status: "Shipped",
     role: "UI/UX Designer",
-    cover:
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1600&q=80",
+    cover: drive("14wbd9DZLOxZbkMoWNIv_xOlbdgfya1xZ"),
     teaser:
       "A telematics-powered fleet management ecosystem — one platform, four roles, one source of truth.",
     summary:
@@ -361,9 +378,14 @@ export const featuredProjects = [
       "Cleaner compliance experience for drivers"
     ],
     gallery: [
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1400&q=80",
-      "https://images.unsplash.com/photo-1631093441315-a06b9bcbe63f?w=1400&q=80",
-      "https://images.pexels.com/photos/27141316/pexels-photo-27141316.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+      drive("1eE_LjRG1g1NRHRYGFnGmCMQQd8Q9wRTJ"),
+      drive("14wbd9DZLOxZbkMoWNIv_xOlbdgfya1xZ"),
+      drive("1K1b3u_pPsfQqQYCUKyTGwbmYQp3ca36z"),
+      drive("1qYydJn3wsWXG4Hfz3z5CEXQXB5wMcQEu"),
+      drive("1JlfScAwdLV_QasHAIND6TlvvqBQWB_AL"),
+      drive("12EFh22kzmo_qOtqOftTxYqovmOGqToB6"),
+      drive("11K6m_pLzWQaIWkGw6i2kyKRuKJsh2H7L"),
+      drive("1syWF1Yxr5zKo6dkfaOFBlSSQwLv74ms9")
     ],
     modules: [
       {
